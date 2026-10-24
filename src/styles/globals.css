@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+@custom-variant motion-safe (@media (prefers-reduced-motion: no-preference));
+
+@theme {
+  --font-display: "Bebas Neue", ui-sans-serif, system-ui, sans-serif;
+  --font-hero: "Barlow Condensed", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand-primary: #00530d;
+  --color-brand-secondary: #167b34;
+  --color-brand-dark: #10261b;
+  --color-brand-cream: #f5f7f2;
+  --color-brand-white: #ffffff;
+  --color-brand-text: #202821;
+  --color-brand-muted: #5a665c;
+  --color-brand-accent: #2ecc71;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --color-site-cta: var(--color-brand-primary);
+  --color-site-cta-hover: var(--color-brand-secondary);
+}
+
+@layer base {
+  :root {
+    --site-gutter: clamp(1.25rem, 4.2vw, 5.5rem);
+  }
+
+  html,
+  body,
+  #root {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip;
+  }
+
+  body {
+    overflow-x: clip;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-brand-cream text-brand-text font-body text-[1.0625rem] leading-relaxed antialiased md:text-lg;
+  }
+
+  ::selection {
+    @apply bg-brand-secondary/25 text-brand-dark;
+  }
+}
+
+@layer utilities {
+  .site-gutter {
+    padding-left: var(--site-gutter);
+    padding-right: var(--site-gutter);
+  }
+
+  .text-display {
+    font-family: var(--font-display);
+    letter-spacing: 0.04em;
+    font-weight: 400;
+  }
+
+  .text-hero {
+    font-family: var(--font-hero);
+    font-weight: 800;
+    letter-spacing: 0.01em;
+  }
+
+  .section-pad {
+    @apply py-20 md:py-28 lg:py-32;
+  }
+
+  .text-section-body {
+    @apply text-xl leading-relaxed text-brand-text md:text-2xl md:leading-relaxed;
+  }
+
+  .bg-site-cta {
+    background-color: var(--color-site-cta);
+  }
+
+  .btn-site-cta {
+    background-color: var(--color-site-cta);
+    border-color: var(--color-site-cta);
+    color: var(--color-brand-white);
+  }
+
+  .btn-site-cta:hover {
+    background-color: var(--color-site-cta-hover);
+    border-color: var(--color-site-cta-hover);
+  }
+
+  .showcase-marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 1.25rem;
+    padding-inline: var(--site-gutter);
+    animation: showcase-marquee 85s linear infinite;
+  }
+
+  .showcase-marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  .showcase-marquee-slide {
+    width: clamp(15rem, 72vw, 18rem);
+  }
+
+  @media (min-width: 640px) {
+    .showcase-marquee-slide {
+      width: clamp(14rem, 42vw, 17rem);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .showcase-marquee-slide {
+      width: calc((100vw - 2 * var(--site-gutter) - 5 * 1.25rem) / 6);
+      max-width: 18rem;
+      min-width: 13.5rem;
+    }
+  }
+
+  @keyframes showcase-marquee {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .showcase-marquee-track {
+      animation: none;
+    }
+  }
+
+  .survey-grid {
+    background-image:
+      linear-gradient(to right, rgb(0 83 13 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(0 83 13 / 0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .survey-grid-light {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.08) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+}
