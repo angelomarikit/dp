@@ -64,9 +64,9 @@ export function Navbar() {
     return isActive ? "text-white" : "text-white/75 hover:text-white";
   };
 
-  const headerHeight = onHero
-    ? "min-h-[15rem] py-3 lg:min-h-[16rem] lg:py-4"
-    : "min-h-[14.5rem] py-2.5 lg:min-h-[15.5rem] lg:py-3";
+  const desktopHeaderHeight = onHero
+    ? "lg:min-h-[16rem] lg:py-4"
+    : "lg:min-h-[15.5rem] lg:py-3";
 
   return (
     <motion.header
@@ -81,12 +81,12 @@ export function Navbar() {
       }`}
     >
       <Container
-        className={`relative grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 sm:gap-3 lg:grid-cols-[minmax(18rem,40rem)_minmax(0,1fr)_auto] xl:grid-cols-[minmax(20rem,44rem)_minmax(0,1fr)_auto] 2xl:grid-cols-[minmax(22rem,48rem)_minmax(0,1fr)_auto] ${headerHeight}`}
+        className={`relative grid grid-cols-[minmax(0,1fr)_auto] items-center gap-0 py-3 max-lg:pr-0 lg:grid-cols-[minmax(18rem,40rem)_minmax(0,1fr)_auto] lg:gap-x-3 lg:py-0 xl:grid-cols-[minmax(20rem,44rem)_minmax(0,1fr)_auto] 2xl:grid-cols-[minmax(22rem,48rem)_minmax(0,1fr)_auto] ${desktopHeaderHeight}`}
       >
         <button
           type="button"
           onClick={() => handleNav(`#${sectionIds.home}`)}
-          className="col-start-1 z-10 max-w-[calc(100%-4.25rem)] shrink-0 justify-self-start self-center lg:max-w-full lg:min-w-[16rem]"
+          className="relative z-10 col-start-1 min-w-0 max-w-full shrink justify-self-start pr-0 lg:min-w-[16rem] lg:max-w-full lg:shrink-0"
           aria-label={`${siteConfig.name} home`}
         >
           <BrandLogo
@@ -97,8 +97,48 @@ export function Navbar() {
           <BrandLogo variant="bar" onDark className="hidden lg:block" />
         </button>
 
+        <div className="col-start-2 flex shrink-0 items-center justify-end gap-1 pl-0 lg:col-start-3 lg:gap-4 lg:pl-0 xl:gap-5">
+          <a
+            href={`tel:${siteConfig.phoneTel}`}
+            className="-ml-0.5 inline-flex shrink-0 items-center justify-center rounded-sm py-2.5 pr-1 pl-0 text-white/90 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-secondary lg:ml-0 lg:hidden lg:p-2"
+            aria-label={`Call ${siteConfig.phoneDisplay}`}
+          >
+            <Phone size={35} aria-hidden />
+          </a>
+
+          <a
+            href={`tel:${siteConfig.phoneTel}`}
+            className={`hidden items-center gap-2 rounded-sm text-sm font-medium whitespace-nowrap transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-secondary lg:inline-flex xl:text-base ${
+              solid ? "text-white/85 hover:text-white" : "text-white/80 hover:text-white"
+            }`}
+            title={siteConfig.phoneDisplay}
+          >
+            <Phone size={18} aria-hidden />
+            <span className="hidden xl:inline">{siteConfig.phoneDisplay}</span>
+          </a>
+
+          <Button
+            variant="primary"
+            className="text-hero shrink-0 tracking-[0.06em] uppercase max-lg:!px-5 max-lg:!py-[1.05rem] max-lg:!text-[1.08rem] sm:max-lg:!px-[1.26rem] sm:max-lg:!py-[1.26rem] sm:max-lg:!text-[0.99rem] lg:!px-5 lg:!py-3 lg:!text-sm xl:!px-7 xl:!py-3.5 xl:!text-base"
+            onClick={() => handleNav(`#${sectionIds.contact}`)}
+          >
+            Request a Survey
+          </Button>
+
+          <button
+            type="button"
+            className="inline-flex shrink-0 items-center justify-center rounded-sm py-2.5 pr-0 pl-1 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-secondary lg:hidden"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMenuOpen((o) => !o)}
+          >
+            {menuOpen ? <X size={43} /> : <Menu size={43} />}
+          </button>
+        </div>
+
         <nav
-          className="col-start-1 col-end-3 row-start-1 hidden min-w-0 items-center justify-center gap-3 lg:col-start-2 lg:col-end-3 lg:flex xl:gap-6 2xl:gap-8"
+          className="hidden min-w-0 items-center justify-center gap-3 lg:col-start-2 lg:row-start-1 lg:flex xl:gap-6 2xl:gap-8"
           aria-label="Primary"
         >
           {navLinks.map((link) => {
@@ -116,48 +156,6 @@ export function Navbar() {
             );
           })}
         </nav>
-
-        <div className="col-start-2 flex shrink-0 items-center justify-self-end gap-1 sm:gap-2 lg:col-start-3 lg:gap-4 xl:gap-5">
-          <a
-            href={`tel:${siteConfig.phoneTel}`}
-            className={`rounded-sm p-2 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-secondary lg:hidden ${
-              solid ? "text-white/90" : "text-white/90"
-            }`}
-            aria-label={`Call ${siteConfig.phoneDisplay}`}
-          >
-            <Phone size={20} aria-hidden />
-          </a>
-
-          <a
-            href={`tel:${siteConfig.phoneTel}`}
-            className={`hidden items-center gap-2 rounded-sm text-sm font-medium whitespace-nowrap transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-secondary lg:inline-flex xl:text-base ${
-              solid ? "text-white/85 hover:text-white" : "text-white/80 hover:text-white"
-            }`}
-            title={siteConfig.phoneDisplay}
-          >
-            <Phone size={18} aria-hidden />
-            <span className="hidden xl:inline">{siteConfig.phoneDisplay}</span>
-          </a>
-
-          <Button
-            variant="primary"
-            className="text-hero hidden shrink-0 px-5 py-3 text-sm tracking-[0.08em] uppercase lg:inline-flex xl:px-7 xl:py-3.5 xl:text-base"
-            onClick={() => handleNav(`#${sectionIds.contact}`)}
-          >
-            Request a Survey
-          </Button>
-
-          <button
-            type="button"
-            className="rounded-sm p-2 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-secondary lg:hidden"
-            aria-expanded={menuOpen}
-            aria-controls="mobile-menu"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            onClick={() => setMenuOpen((o) => !o)}
-          >
-            {menuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
       </Container>
 
       <AnimatePresence>

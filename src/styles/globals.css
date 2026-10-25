@@ -101,17 +101,18 @@
 
   /* Logo sizing — explicit CSS so production (Vercel) matches local dev */
   .brand-logo-nav-mobile {
-    width: min(calc(100vw - 5rem), 22rem);
+    width: 100%;
+    max-width: calc(100vw - var(--site-gutter) * 2 - 13.5rem);
     height: auto;
-    max-height: 14rem;
+    max-height: 15rem;
     object-fit: contain;
     object-position: left;
   }
 
   @media (min-width: 640px) {
     .brand-logo-nav-mobile {
-      width: min(calc(100vw - 4.75rem), 24rem);
-      max-height: 15rem;
+      max-width: calc(100vw - var(--site-gutter) * 2 - 14.1rem);
+      max-height: 16rem;
     }
   }
 
