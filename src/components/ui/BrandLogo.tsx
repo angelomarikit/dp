@@ -55,7 +55,7 @@ export function BrandLogo({
       : variant === "navLarge"
         ? "h-[clamp(7rem,11vw,13rem)] w-auto max-w-[min(62vw,720px)] object-contain object-left lg:h-[clamp(8.5rem,12.5vw,16rem)] lg:max-w-[min(56vw,820px)] xl:h-[clamp(9.5rem,13.5vw,18rem)] xl:max-w-[900px] 2xl:h-[clamp(10.5rem,14vw,20rem)] 2xl:max-w-[980px]"
       : variant === "navMobile"
-        ? "h-auto w-[min(calc(100vw-4.25rem),38rem)] max-h-[14.5rem] object-contain object-left sm:max-h-[15.5rem] md:max-h-[16rem] md:w-[min(calc(100vw-5rem),42rem)]"
+        ? "h-auto w-[min(calc(100vw-5.5rem),17rem)] max-h-[4.75rem] object-contain object-left sm:max-h-[5.25rem] sm:w-[min(calc(100vw-5.25rem),19rem)]"
       : variant === "nav"
         ? "h-10 w-auto max-w-[min(62vw,280px)] object-contain object-left md:h-11 md:max-w-[320px] lg:h-12 lg:max-w-[360px]"
       : variant === "bar"

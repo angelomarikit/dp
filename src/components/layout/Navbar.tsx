@@ -64,6 +64,10 @@ export function Navbar() {
     return isActive ? "text-white" : "text-white/75 hover:text-white";
   };
 
+  const headerHeight = onHero
+    ? "min-h-[6.25rem] py-3 lg:min-h-[6.5rem] lg:py-3"
+    : "min-h-[5.75rem] py-2.5 lg:min-h-[6rem] lg:py-0";
+
   return (
     <motion.header
       ref={navRef}
@@ -73,40 +77,32 @@ export function Navbar() {
       className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,border-color,backdrop-filter] duration-500 ${
         solid
           ? "border-b border-white/10 bg-brand-dark/92 shadow-lg shadow-black/20 backdrop-blur-md"
-          : "overflow-visible border-b border-transparent bg-transparent"
+          : "border-b border-transparent bg-transparent"
       }`}
     >
       <Container
-        className={`relative grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 overflow-visible sm:gap-3 lg:grid-cols-[auto_1fr_auto] ${
-          onHero
-            ? "min-h-[15rem] py-3 md:min-h-[16rem] lg:min-h-[clamp(7rem,14vw,11rem)] lg:py-4 xl:min-h-[clamp(7.5rem,15vw,12rem)]"
-            : "min-h-[15rem] py-2.5 md:min-h-[16rem] lg:h-[6rem] lg:min-h-0 lg:py-0"
-        }`}
+        className={`relative grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 lg:grid-cols-[minmax(0,14rem)_1fr_auto] xl:grid-cols-[minmax(0,16rem)_1fr_auto] ${headerHeight}`}
       >
         <button
           type="button"
           onClick={() => handleNav(`#${sectionIds.home}`)}
-          className="col-start-1 min-w-0 max-w-[calc(100%-3.5rem)] shrink justify-self-start self-center rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-secondary lg:hidden"
+          className="col-start-1 z-10 min-w-0 max-w-[calc(100%-4.75rem)] justify-self-start self-center lg:max-w-full"
           aria-label={`${siteConfig.name} home`}
         >
-          <BrandLogo variant="navMobile" onDark={onHero || solid} />
-        </button>
-
-        <button
-          type="button"
-          onClick={() => handleNav(`#${sectionIds.home}`)}
-          className={`hidden rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-secondary lg:col-start-1 lg:block ${
-            onHero
-              ? "absolute top-1/2 z-30 -translate-y-1/2 left-[clamp(2.75rem,9vw,12rem)] xl:left-[clamp(3.5rem,11vw,15rem)] 2xl:left-[clamp(4rem,12vw,17rem)]"
-              : "justify-self-start"
-          }`}
-          aria-label={`${siteConfig.name} home`}
-        >
-          <BrandLogo variant={onHero ? "navLarge" : "bar"} onDark />
+          <BrandLogo
+            variant="navMobile"
+            onDark={onHero || solid}
+            className="lg:hidden"
+          />
+          <BrandLogo
+            variant="bar"
+            onDark
+            className="hidden max-h-[4.25rem] lg:block xl:max-h-[4.75rem]"
+          />
         </button>
 
         <nav
-          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 lg:flex xl:gap-11 2xl:gap-14"
+          className="col-start-1 col-end-3 row-start-1 hidden min-w-0 items-center justify-center gap-3 lg:col-start-2 lg:col-end-3 lg:flex xl:gap-6 2xl:gap-8"
           aria-label="Primary"
         >
           {navLinks.map((link) => {
@@ -117,7 +113,7 @@ export function Navbar() {
                 key={link.href}
                 type="button"
                 onClick={() => handleNav(link.href)}
-                className={`text-hero text-xl tracking-[0.1em] uppercase transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-secondary xl:text-2xl xl:tracking-[0.11em] 2xl:text-3xl ${linkClass(isActive)}`}
+                className={`text-hero shrink-0 text-sm tracking-[0.08em] uppercase transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-secondary xl:text-base 2xl:text-lg ${linkClass(isActive)}`}
               >
                 {link.label}
               </button>
@@ -125,37 +121,39 @@ export function Navbar() {
           })}
         </nav>
 
-        <div className="hidden items-center justify-self-end lg:col-start-3 lg:flex lg:gap-8 lg:-translate-x-8 xl:gap-10 xl:-translate-x-10 2xl:gap-12 2xl:-translate-x-12">
+        <div className="col-start-2 flex shrink-0 items-center justify-self-end gap-1 sm:gap-2 lg:col-start-3 lg:gap-4 xl:gap-5">
           <a
             href={`tel:${siteConfig.phoneTel}`}
-            className={`inline-flex items-center gap-2.5 text-lg font-medium whitespace-nowrap transition-colors xl:text-xl ${
-              solid ? "text-white/85 hover:text-white" : "text-white/80 hover:text-white"
+            className={`rounded-sm p-2 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-secondary lg:hidden ${
+              solid ? "text-white/90" : "text-white/90"
             }`}
+            aria-label={`Call ${siteConfig.phoneDisplay}`}
           >
             <Phone size={20} aria-hidden />
-            {siteConfig.phoneDisplay}
+          </a>
+
+          <a
+            href={`tel:${siteConfig.phoneTel}`}
+            className={`hidden items-center gap-2 rounded-sm text-sm font-medium whitespace-nowrap transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-secondary lg:inline-flex xl:text-base ${
+              solid ? "text-white/85 hover:text-white" : "text-white/80 hover:text-white"
+            }`}
+            title={siteConfig.phoneDisplay}
+          >
+            <Phone size={18} aria-hidden />
+            <span className="hidden xl:inline">{siteConfig.phoneDisplay}</span>
           </a>
 
           <Button
             variant="primary"
-            className="text-hero ml-1 shrink-0 px-8 py-4 text-lg tracking-[0.08em] uppercase xl:ml-2 xl:px-10 xl:py-[1.125rem] xl:text-xl 2xl:text-2xl"
+            className="text-hero hidden shrink-0 px-5 py-3 text-sm tracking-[0.08em] uppercase lg:inline-flex xl:px-7 xl:py-3.5 xl:text-base"
             onClick={() => handleNav(`#${sectionIds.contact}`)}
           >
             Request a Survey
           </Button>
-        </div>
 
-        <div className="col-start-2 flex items-center justify-self-end gap-2 lg:col-start-3 lg:hidden">
-          <a
-            href={`tel:${siteConfig.phoneTel}`}
-            className="rounded-sm p-2 text-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-secondary"
-            aria-label={`Call ${siteConfig.phoneDisplay}`}
-          >
-            <Phone size={18} />
-          </a>
           <button
             type="button"
-            className="rounded-sm p-2 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-secondary"
+            className="rounded-sm p-2 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-secondary lg:hidden"
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -187,6 +185,12 @@ export function Navbar() {
                   {link.label}
                 </button>
               ))}
+              <a
+                href={`tel:${siteConfig.phoneTel}`}
+                className="text-hero rounded-sm px-2 py-3 text-left text-lg tracking-wide text-white/85 hover:bg-white/5"
+              >
+                {siteConfig.phoneDisplay}
+              </a>
               <Button
                 className="text-hero mt-2 w-full text-base tracking-[0.08em] uppercase"
                 onClick={() => handleNav(`#${sectionIds.contact}`)}

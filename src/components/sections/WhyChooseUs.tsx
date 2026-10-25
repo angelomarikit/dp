@@ -1,30 +1,7 @@
-import { sectionIds } from "../../data/site";
+import { sectionIds, siteConfig } from "../../data/site";
 import { Container } from "../ui/Container";
+import { Reveal } from "../ui/Reveal";
 import { SectionHeading } from "../ui/SectionHeading";
-import { StaggerContainer, StaggerItem } from "../ui/StaggerContainer";
-
-const principles = [
-  {
-    number: "01",
-    title: "Detailed and careful measurement",
-    copy: "Field work is approached methodically, with attention to site conditions and the measurements your inquiry requires.",
-  },
-  {
-    number: "02",
-    title: "Clear project communication",
-    copy: "Requirements, scope, and next steps are discussed in straightforward language so expectations stay aligned.",
-  },
-  {
-    number: "03",
-    title: "Professional, site-focused service",
-    copy: "Surveying support is delivered with a practical, on-the-ground mindset suited to property and construction contexts.",
-  },
-  {
-    number: "04",
-    title: "Organized surveying workflows",
-    copy: "From inquiry through coordination, processes are structured to keep information organized and progress visible.",
-  },
-];
 
 export function WhyChooseUs() {
   return (
@@ -38,28 +15,36 @@ export function WhyChooseUs() {
       <Container className="relative">
         <SectionHeading
           light
-          label="03 / Our Approach"
-          title="Confidence starts with clarity."
-          description="Our positioning focuses on how surveying work is planned, communicated, and carried out—not unsupported claims about awards or volume."
+          label="Why Choose Us?"
+          title="We earn your trust through our work."
+          description="At D.P. Land Surveying Services, we believe that being chosen is not something we ask for—it is something we earn."
         />
 
-        <StaggerContainer className="mt-14 grid gap-6 md:grid-cols-2">
-          {principles.map((item) => (
-            <StaggerItem key={item.number}>
-              <article className="border border-white/10 bg-white/5 p-6 backdrop-blur-sm md:p-8">
-                <p className="text-display text-5xl leading-none font-semibold text-white/15">
-                  {item.number}
-                </p>
-                <h3 className="text-display mt-4 text-3xl font-semibold uppercase">
-                  {item.title}
-                </h3>
-                <p className="mt-3 text-lg leading-relaxed text-white/80 md:text-xl">
-                  {item.copy}
-                </p>
-              </article>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
+        <div className="mt-12 max-w-4xl space-y-8">
+          <Reveal>
+            <p className="text-lg leading-relaxed text-white/85 md:text-xl md:leading-relaxed">
+              We demonstrate our worth through our commitment to every project, the
+              quality and accuracy of our outputs, and the value we provide to our
+              clients. For us, every land surveying project is more than just a job.
+              It is a responsibility that requires accuracy, integrity, and attention
+              to detail.
+            </p>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <p className="text-lg leading-relaxed text-white/85 md:text-xl md:leading-relaxed">
+              At D.P. Land Surveying Services, we do not simply ask for your trust.
+              We work to earn it—through our actions, our outputs, and the value we
+              bring to every project.
+            </p>
+          </Reveal>
+          <Reveal delay={0.14}>
+            <blockquote className="border-l-4 border-brand-accent pl-6">
+              <p className="text-display text-2xl leading-snug font-semibold text-white uppercase md:text-3xl">
+                {siteConfig.clientTagline}
+              </p>
+            </blockquote>
+          </Reveal>
+        </div>
       </Container>
     </section>
   );

@@ -2,6 +2,8 @@ export const siteConfig = {
   name: "D.P. Land Surveying Services",
   owner: "Randy Palmones",
   tagline: "Professional land surveying services built on accuracy, reliability, and attention to detail.",
+  clientTagline:
+    "We Don't Ask to Be Chosen. We Earn It Through Our Work.",
   phoneDisplay: "+63 915 160 8590",
   phoneTel: "+639151608590",
   email: "dplandsurveys@gmail.com",

@@ -1,5 +1,15 @@
 import type { LucideIcon } from "lucide-react";
-import { MapPinned, Layers, Grid3x3, Ruler } from "lucide-react";
+import {
+  Plane,
+  Map,
+  Waves,
+  ClipboardCheck,
+  MapPinned,
+  ShieldCheck,
+  Layers,
+  Ruler,
+  Grid3x3,
+} from "lucide-react";
 
 export interface ServiceItem {
   id: string;
@@ -7,48 +17,82 @@ export interface ServiceItem {
   title: string;
   description: string;
   icon: LucideIcon;
-  /** Prospective offering — confirm with owner before publishing. */
-  pendingOwnerConfirmation: boolean;
 }
 
 export const servicesNote =
-  "Service categories below are prospective and should be confirmed by the owner before production publishing.";
+  "Land surveying services to establish and verify boundaries, support construction, and provide survey data for development and property transactions.";
 
 export const services: ServiceItem[] = [
   {
-    id: "boundary",
+    id: "caap-height",
     coordinate: "N 01°",
-    title: "Boundary and Relocation Surveys",
+    title: "CAAP Height Clearance Survey",
     description:
-      "Support for property boundary definition and relocation-related measurements, coordinated with your project requirements.",
+      "Height and obstruction surveys coordinated for aviation clearance requirements and related technical submissions.",
+    icon: Plane,
+  },
+  {
+    id: "lot-plan-vicinity",
+    coordinate: "E 02°",
+    title: "Lot Plan with Vicinity Map",
+    description:
+      "Prepared lot plans with vicinity mapping to show property location, adjoining parcels, and contextual site references.",
+    icon: Map,
+  },
+  {
+    id: "bathymetric",
+    coordinate: "S 03°",
+    title: "Bathymetric Survey",
+    description:
+      "Underwater depth and seabed measurements to support coastal, marine, and water-related engineering and planning needs.",
+    icon: Waves,
+  },
+  {
+    id: "as-built",
+    coordinate: "W 04°",
+    title: "As-Built Survey",
+    description:
+      "Documentation of constructed features and finished works as built on site for verification, records, and project closeout.",
+    icon: ClipboardCheck,
+  },
+  {
+    id: "relocation",
+    coordinate: "N 05°",
+    title: "Relocation Survey",
+    description:
+      "Re-establishment of property corners and boundaries based on available land title documents, approved survey plans, and relevant survey records.",
     icon: MapPinned,
-    pendingOwnerConfirmation: true,
+  },
+  {
+    id: "boundary-verification",
+    coordinate: "E 06°",
+    title: "Boundary Verification Survey",
+    description:
+      "Identification and checking of property boundaries to help determine the location of lot corners and assess possible boundary discrepancies or encroachments.",
+    icon: ShieldCheck,
   },
   {
     id: "topographic",
-    coordinate: "E 02°",
-    title: "Topographic Surveys",
+    coordinate: "S 07°",
+    title: "Topographic Survey",
     description:
-      "Site terrain and feature mapping to help teams understand elevation, contours, and existing conditions on the ground.",
+      "Collection of ground elevations, contours, and existing site features to support engineering design, site planning, and land development.",
     icon: Layers,
-    pendingOwnerConfirmation: true,
-  },
-  {
-    id: "subdivision",
-    coordinate: "S 03°",
-    title: "Subdivision Surveys",
-    description:
-      "Measurement support aligned with subdivision planning needs, subject to scope and documentation provided.",
-    icon: Grid3x3,
-    pendingOwnerConfirmation: true,
   },
   {
     id: "construction",
-    coordinate: "W 04°",
-    title: "Construction Layout and Site Surveys",
+    coordinate: "W 08°",
+    title: "Construction Survey",
     description:
-      "On-site layout and verification measurements to help construction teams position work according to agreed plans.",
+      "Establishment of survey control points and setting out of specified locations, alignments, and elevations in accordance with approved project plans.",
     icon: Ruler,
-    pendingOwnerConfirmation: true,
+  },
+  {
+    id: "subdivision-consolidation",
+    coordinate: "N 09°",
+    title: "Subdivision and Consolidation Surveys",
+    description:
+      "Division of land parcels or the consolidation of adjoining lots, subject to applicable technical and regulatory requirements.",
+    icon: Grid3x3,
   },
 ];

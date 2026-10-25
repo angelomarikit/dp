@@ -3,7 +3,6 @@ import { services, servicesNote } from "../../data/services";
 import { scrollToSection } from "../../lib/scrollTo";
 import { Button } from "../ui/Button";
 import { Container } from "../ui/Container";
-import { Reveal } from "../ui/Reveal";
 import { SectionHeading } from "../ui/SectionHeading";
 import { StaggerContainer, StaggerItem } from "../ui/StaggerContainer";
 
@@ -14,16 +13,13 @@ export function Services() {
         <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading
             label="02 / Our Services"
-            title={"The right measurements.\nThe right decisions."}
-            description="Focused surveying categories to discuss with our team. Final service listings should be confirmed before production publishing."
+            title={"Services offered."}
+            description={servicesNote}
             displayStyle="architectural"
           />
-          <Reveal className="max-w-md rounded-sm border border-brand-primary/15 bg-brand-cream/80 p-5 text-base leading-relaxed text-brand-text/90 md:p-6 md:text-lg">
-            {servicesNote}
-          </Reveal>
         </div>
 
-        <StaggerContainer className="mt-14 grid gap-8 md:grid-cols-2 xl:grid-cols-4 xl:gap-6">
+        <StaggerContainer className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:gap-6">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
@@ -46,11 +42,6 @@ export function Services() {
                   <p className="mt-4 flex-1 text-lg leading-relaxed text-brand-text md:text-xl md:leading-relaxed">
                     {service.description}
                   </p>
-                  {service.pendingOwnerConfirmation ? (
-                    <p className="mt-5 text-sm font-medium tracking-wide text-brand-primary uppercase md:text-base">
-                      Pending owner confirmation
-                    </p>
-                  ) : null}
                   <Button
                     variant="ghost"
                     className="mt-6 justify-start px-0 py-0 text-base text-brand-primary hover:text-brand-secondary md:text-lg"
