@@ -1,10 +1,10 @@
 export interface InquiryFormValues {
   fullName: string;
   email: string;
-  phone: string;
-  serviceNeeded: string;
+  contactNo: string;
+  lotArea: string;
   location: string;
-  message: string;
+  purposeOfSurvey: string;
 }
 
 export type FormErrors = Partial<Record<keyof InquiryFormValues, string>>;
@@ -22,11 +22,14 @@ export function validateInquiryForm(values: InquiryFormValues): FormErrors {
   } else if (!emailPattern.test(values.email.trim())) {
     errors.email = "Please enter a valid email address.";
   }
-  if (!values.phone.trim()) {
-    errors.phone = "Please enter a phone number.";
+  if (!values.contactNo.trim()) {
+    errors.contactNo = "Please enter your contact number.";
   }
-  if (!values.message.trim()) {
-    errors.message = "Please include a brief message about your inquiry.";
+  if (!values.location.trim()) {
+    errors.location = "Please enter the property or project location.";
+  }
+  if (!values.purposeOfSurvey.trim()) {
+    errors.purposeOfSurvey = "Please describe the purpose of the survey.";
   }
 
   return errors;
@@ -36,6 +39,10 @@ export function buildMailtoDraft(values: InquiryFormValues): string {
   const subject = encodeURIComponent(
     `Survey inquiry — ${values.fullName.trim()}`,
   );
+  const lotAreaLine = values.lotArea.trim()
+    ? `${values.lotArea.trim()} sqm`
+    : "Not specified";
+
   const body = encodeURIComponent(
     [
       "Hello D.P. Land Surveying Services,",
@@ -44,12 +51,10 @@ export function buildMailtoDraft(values: InquiryFormValues): string {
       "",
       `Full Name: ${values.fullName.trim()}`,
       `Email: ${values.email.trim()}`,
-      `Phone: ${values.phone.trim()}`,
-      `Service Needed: ${values.serviceNeeded.trim() || "Not specified"}`,
-      `Property / Project Location: ${values.location.trim() || "Not specified"}`,
-      "",
-      "Message:",
-      values.message.trim(),
+      `Contact No.: ${values.contactNo.trim()}`,
+      `Lot Area: ${lotAreaLine}`,
+      `Location: ${values.location.trim()}`,
+      `Purpose of Survey: ${values.purposeOfSurvey.trim()}`,
       "",
       "---",
       "Sent via website inquiry form (mailto draft).",

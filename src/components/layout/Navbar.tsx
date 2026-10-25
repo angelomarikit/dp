@@ -65,8 +65,8 @@ export function Navbar() {
   };
 
   const headerHeight = onHero
-    ? "min-h-[6.25rem] py-3 lg:min-h-[6.5rem] lg:py-3"
-    : "min-h-[5.75rem] py-2.5 lg:min-h-[6rem] lg:py-0";
+    ? "min-h-[7.75rem] py-3 lg:min-h-[8rem] lg:py-3"
+    : "min-h-[7.25rem] py-2.5 lg:min-h-[7.5rem] lg:py-2";
 
   return (
     <motion.header
@@ -81,12 +81,12 @@ export function Navbar() {
       }`}
     >
       <Container
-        className={`relative grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 lg:grid-cols-[minmax(0,14rem)_1fr_auto] xl:grid-cols-[minmax(0,16rem)_1fr_auto] ${headerHeight}`}
+        className={`relative grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 sm:gap-3 lg:grid-cols-[minmax(0,20rem)_1fr_auto] xl:grid-cols-[minmax(0,22rem)_1fr_auto] 2xl:grid-cols-[minmax(0,24rem)_1fr_auto] ${headerHeight}`}
       >
         <button
           type="button"
           onClick={() => handleNav(`#${sectionIds.home}`)}
-          className="col-start-1 z-10 min-w-0 max-w-[calc(100%-4.75rem)] justify-self-start self-center lg:max-w-full"
+          className="col-start-1 z-10 min-w-0 max-w-[calc(100%-4.25rem)] justify-self-start self-center lg:max-w-full"
           aria-label={`${siteConfig.name} home`}
         >
           <BrandLogo
@@ -94,11 +94,7 @@ export function Navbar() {
             onDark={onHero || solid}
             className="lg:hidden"
           />
-          <BrandLogo
-            variant="bar"
-            onDark
-            className="hidden max-h-[4.25rem] lg:block xl:max-h-[4.75rem]"
-          />
+          <BrandLogo variant="bar" onDark className="hidden lg:block" />
         </button>
 
         <nav

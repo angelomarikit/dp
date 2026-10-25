@@ -1,7 +1,6 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { Mail, Phone } from "lucide-react";
-import { services } from "../../data/services";
 import { sectionIds, siteConfig } from "../../data/site";
 import {
   buildMailtoDraft,
@@ -16,10 +15,10 @@ import { Button } from "../ui/Button";
 const initialValues: InquiryFormValues = {
   fullName: "",
   email: "",
-  phone: "",
-  serviceNeeded: "",
+  contactNo: "",
+  lotArea: "",
   location: "",
-  message: "",
+  purposeOfSurvey: "",
 };
 
 export function Contact() {
@@ -46,7 +45,13 @@ export function Contact() {
   const field = (
     name: keyof InquiryFormValues,
     label: string,
-    opts?: { type?: string; as?: "textarea" | "select"; required?: boolean },
+    opts?: {
+      type?: string;
+      as?: "textarea";
+      required?: boolean;
+      placeholder?: string;
+      inputMode?: "text" | "decimal" | "tel" | "email";
+    },
   ) => {
     const id = `inquiry-${name}`;
     const error = errors[name];
@@ -69,26 +74,13 @@ export function Contact() {
             onChange={(e) => setValues((v) => ({ ...v, [name]: e.target.value }))}
             className={`${common} ${border} resize-y min-h-[120px]`}
           />
-        ) : opts?.as === "select" ? (
-          <select
-            id={id}
-            name={name}
-            value={values[name]}
-            onChange={(e) => setValues((v) => ({ ...v, [name]: e.target.value }))}
-            className={`${common} ${border}`}
-          >
-            <option value="">Select a service (optional)</option>
-            {services.map((s) => (
-              <option key={s.id} value={s.title}>
-                {s.title}
-              </option>
-            ))}
-          </select>
         ) : (
           <input
             id={id}
             name={name}
             type={opts?.type ?? "text"}
+            inputMode={opts?.inputMode}
+            placeholder={opts?.placeholder}
             value={values[name]}
             onChange={(e) => setValues((v) => ({ ...v, [name]: e.target.value }))}
             className={`${common} ${border}`}
@@ -129,9 +121,8 @@ export function Contact() {
 
             <Reveal delay={0.1} className="text-section-body mt-6">
               <p>
-                Before contacting us, it helps to prepare your property or project
-                location, intended use of the survey, and any available lot or plan
-                references.
+                Please include lot area (sqm), location, purpose of survey, and a
+                contact number so we can review your inquiry efficiently.
               </p>
             </Reveal>
           </div>
@@ -145,15 +136,22 @@ export function Contact() {
               <div className="grid gap-5 sm:grid-cols-2">
                 <div className="sm:col-span-2">{field("fullName", "Full Name", { required: true })}</div>
                 <div>{field("email", "Email", { type: "email", required: true })}</div>
-                <div>{field("phone", "Phone Number", { type: "tel", required: true })}</div>
+                <div>{field("contactNo", "Contact No.", { type: "tel", required: true })}</div>
                 <div className="sm:col-span-2">
-                  {field("serviceNeeded", "Service Needed", { as: "select" })}
+                  {field("lotArea", "Lot Area (sqm)", {
+                    type: "text",
+                    inputMode: "decimal",
+                    placeholder: "e.g. 450",
+                  })}
                 </div>
                 <div className="sm:col-span-2">
-                  {field("location", "Property / Project Location")}
+                  {field("location", "Location", { required: true })}
                 </div>
                 <div className="sm:col-span-2">
-                  {field("message", "Message", { as: "textarea", required: true })}
+                  {field("purposeOfSurvey", "Purpose of Survey", {
+                    as: "textarea",
+                    required: true,
+                  })}
                 </div>
               </div>
 
