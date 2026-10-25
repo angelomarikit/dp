@@ -44,6 +44,48 @@ async function removeWhiteBackground(inputPath, outputPath) {
     .toFile(outputPath);
 }
 
+/** Remove empty transparent margins so CSS height/width match visible artwork */
+async function cropToOpaqueBounds(inputPath, outputPath) {
+  const { data, info } = await sharp(inputPath)
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  const { width, height, channels } = info;
+  let minX = width;
+  let minY = height;
+  let maxX = 0;
+  let maxY = 0;
+
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      const a = data[(y * width + x) * channels + 3];
+      if (a > 16) {
+        minX = Math.min(minX, x);
+        minY = Math.min(minY, y);
+        maxX = Math.max(maxX, x);
+        maxY = Math.max(maxY, y);
+      }
+    }
+  }
+
+  if (maxX <= minX || maxY <= minY) {
+    await sharp(inputPath).toFile(outputPath);
+    return;
+  }
+
+  const pad = 8;
+  const left = Math.max(0, minX - pad);
+  const top = Math.max(0, minY - pad);
+  const cropWidth = Math.min(width - left, maxX - minX + 1 + pad * 2);
+  const cropHeight = Math.min(height - top, maxY - minY + 1 + pad * 2);
+
+  await sharp(inputPath)
+    .extract({ left, top, width: cropWidth, height: cropHeight })
+    .png({ compressionLevel: 9, adaptiveFiltering: true })
+    .toFile(outputPath);
+}
+
 async function extractEmblem(fullPath, emblemPath) {
   const meta = await sharp(fullPath).metadata();
   const cropWidth = Math.round(meta.width * 0.28);
@@ -58,7 +100,10 @@ fs.mkdirSync(outDir, { recursive: true });
 const transparent = path.join(outDir, "dp-land-surveying-transparent.png");
 const emblem = path.join(outDir, "dp-land-surveying-emblem.png");
 
-await removeWhiteBackground(source, transparent);
+const transparentRaw = path.join(outDir, "dp-land-surveying-transparent.raw.png");
+await removeWhiteBackground(source, transparentRaw);
+await cropToOpaqueBounds(transparentRaw, transparent);
+await fs.promises.unlink(transparentRaw).catch(() => {});
 await extractEmblem(transparent, emblem);
 
 console.log("Created:", transparent);

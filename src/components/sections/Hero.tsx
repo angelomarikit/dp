@@ -34,7 +34,7 @@ export function Hero() {
         <HeroTechnicalOverlay />
       </div>
 
-      <Container className="relative flex min-h-[100svh] flex-col justify-center pb-28 pt-[clamp(16rem,36vw,19rem)] md:pb-32 md:pt-[clamp(17rem,32vw,20rem)] lg:pt-[clamp(10rem,16vw,13rem)]">
+      <Container className="relative flex min-h-[100svh] flex-col justify-center pb-28 pt-[clamp(18rem,42vw,22rem)] md:pb-32 md:pt-[clamp(19rem,38vw,23rem)] lg:pt-28 lg:pb-32 xl:pt-32">
         <div className="mx-auto w-full max-w-[min(96vw,64rem)] translate-x-[clamp(0.75rem,5vw,4.5rem)] text-left md:max-w-[58rem] lg:max-w-[62rem] xl:max-w-[68rem]">
           <HeroRegionBar />
 

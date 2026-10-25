@@ -64,9 +64,7 @@ export function Navbar() {
     return isActive ? "text-white" : "text-white/75 hover:text-white";
   };
 
-  const desktopHeaderHeight = onHero
-    ? "lg:min-h-[16rem] lg:py-4"
-    : "lg:min-h-[15.5rem] lg:py-3";
+  const desktopHeaderHeight = "lg:min-h-0 lg:py-3 xl:py-3.5";
 
   return (
     <motion.header
@@ -81,23 +79,23 @@ export function Navbar() {
       }`}
     >
       <Container
-        className={`relative grid grid-cols-[minmax(0,1fr)_auto] items-center gap-0 py-3 max-lg:pr-0 lg:grid-cols-[minmax(18rem,40rem)_minmax(0,1fr)_auto] lg:gap-x-3 lg:py-0 xl:grid-cols-[minmax(20rem,44rem)_minmax(0,1fr)_auto] 2xl:grid-cols-[minmax(22rem,48rem)_minmax(0,1fr)_auto] ${desktopHeaderHeight}`}
+        className={`relative grid max-lg:grid-cols-1 max-lg:gap-y-2.5 max-lg:py-2.5 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:items-center lg:gap-x-6 lg:gap-y-0 xl:grid-cols-[auto_minmax(0,1fr)_auto] xl:gap-x-8 ${desktopHeaderHeight}`}
       >
         <button
           type="button"
           onClick={() => handleNav(`#${sectionIds.home}`)}
-          className="relative z-10 col-start-1 min-w-0 max-w-full shrink justify-self-start pr-0 lg:min-w-[16rem] lg:max-w-full lg:shrink-0"
+          className="relative z-10 max-lg:col-start-1 max-lg:row-start-1 max-lg:w-full max-lg:min-w-0 lg:col-start-1 lg:row-start-1 lg:max-w-[min(42vw,32rem)] lg:shrink-0 lg:justify-self-start"
           aria-label={`${siteConfig.name} home`}
         >
-          <BrandLogo
-            variant="navMobile"
-            onDark={onHero || solid}
-            className="lg:hidden"
-          />
-          <BrandLogo variant="bar" onDark className="hidden lg:block" />
+          <span className="max-lg:block lg:hidden">
+            <BrandLogo variant="navMobile" onDark={onHero || solid} />
+          </span>
+          <span className="hidden lg:block">
+            <BrandLogo variant="bar" onDark />
+          </span>
         </button>
 
-        <div className="col-start-2 flex shrink-0 items-center justify-end gap-1 pl-0 lg:col-start-3 lg:gap-4 lg:pl-0 xl:gap-5">
+        <div className="flex w-full shrink-0 items-center justify-end gap-3 max-lg:col-start-1 max-lg:row-start-2 max-lg:justify-between lg:col-start-3 lg:row-start-1 lg:w-auto lg:justify-end lg:gap-4 xl:gap-5">
           <a
             href={`tel:${siteConfig.phoneTel}`}
             className="-ml-0.5 inline-flex shrink-0 items-center justify-center rounded-sm py-2.5 pr-1 pl-0 text-white/90 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-secondary lg:ml-0 lg:hidden lg:p-2"
@@ -119,7 +117,7 @@ export function Navbar() {
 
           <Button
             variant="primary"
-            className="text-hero shrink-0 tracking-[0.06em] uppercase max-lg:!px-5 max-lg:!py-[1.05rem] max-lg:!text-[1.08rem] sm:max-lg:!px-[1.26rem] sm:max-lg:!py-[1.26rem] sm:max-lg:!text-[0.99rem] lg:!px-5 lg:!py-3 lg:!text-sm xl:!px-7 xl:!py-3.5 xl:!text-base"
+            className="text-hero hidden shrink-0 tracking-[0.06em] uppercase lg:inline-flex lg:!px-5 lg:!py-3 lg:!text-sm xl:!px-7 xl:!py-3.5 xl:!text-base"
             onClick={() => handleNav(`#${sectionIds.contact}`)}
           >
             Request a Survey

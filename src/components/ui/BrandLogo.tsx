@@ -55,20 +55,20 @@ export function BrandLogo({
       : variant === "navLarge"
         ? "h-[clamp(7rem,11vw,13rem)] w-auto max-w-[min(62vw,720px)] object-contain object-left lg:h-[clamp(8.5rem,12.5vw,16rem)] lg:max-w-[min(56vw,820px)] xl:h-[clamp(9.5rem,13.5vw,18rem)] xl:max-w-[900px] 2xl:h-[clamp(10.5rem,14vw,20rem)] 2xl:max-w-[980px]"
       : variant === "navMobile"
-        ? "brand-logo-nav-mobile block max-w-none"
+        ? "brand-logo-nav-mobile"
       : variant === "nav"
         ? "h-10 w-auto max-w-[min(62vw,280px)] object-contain object-left md:h-11 md:max-w-[320px] lg:h-12 lg:max-w-[360px]"
       : variant === "bar"
-        ? "brand-logo-bar block max-w-none"
+        ? "brand-logo-bar max-w-full"
       : variant === "footer"
         ? "brand-logo-footer block max-w-none"
         : "h-11 w-auto max-w-[min(100%,300px)] object-contain object-left sm:h-12 md:h-[3.25rem] md:max-w-[340px] lg:h-14 lg:max-w-[400px]";
 
   return (
     <img
-      src="/images/logo/dp-land-surveying-transparent.png?v=2"
-      width={1320}
-      height={943}
+      src="/images/logo/dp-land-surveying-transparent.png?v=4"
+      width={1231}
+      height={335}
       alt={siteConfig.name}
       className={`${sizeClass} ${onDarkImageClass} ${className}`}
       decoding="async"

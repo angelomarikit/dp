@@ -99,49 +99,40 @@
     border-color: var(--color-site-cta-hover);
   }
 
-  /* Logo sizing — explicit CSS so production (Vercel) matches local dev */
-  .brand-logo-nav-mobile {
-    width: 100%;
-    max-width: calc(100vw - var(--site-gutter) * 2 - 13.5rem);
-    height: auto;
-    max-height: 15rem;
-    object-fit: contain;
-    object-position: left;
-  }
-
-  @media (min-width: 640px) {
+  /* Mobile nav only (< lg). Scoped so display:block never overrides Tailwind lg:hidden on the img. */
+  @media (max-width: 1023px) {
     .brand-logo-nav-mobile {
-      max-width: calc(100vw - var(--site-gutter) * 2 - 14.1rem);
-      max-height: 16rem;
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: clamp(5rem, 16vw, 7.25rem);
+      object-fit: contain;
+      object-position: left center;
     }
   }
 
-  .brand-logo-bar {
-    height: 8rem;
-    width: auto;
-    max-width: min(92vw, 55rem);
-    object-fit: contain;
-    object-position: left;
-  }
-
-  @media (min-width: 768px) {
-    .brand-logo-bar {
-      height: 9rem;
-      max-width: 60rem;
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .brand-logo-nav-mobile {
+      max-height: clamp(5.5rem, 14vw, 8rem);
     }
   }
 
+  /* Desktop nav — tight-cropped wordmark; height-capped single-row bar */
   @media (min-width: 1024px) {
     .brand-logo-bar {
-      height: 11.5rem;
-      max-width: 67.5rem;
+      display: block;
+      height: clamp(3.25rem, 3.2vw, 4.25rem);
+      width: auto;
+      max-width: min(42vw, 28rem);
+      object-fit: contain;
+      object-position: left center;
     }
   }
 
   @media (min-width: 1280px) {
     .brand-logo-bar {
-      height: 13rem;
-      max-width: 75rem;
+      height: clamp(3.5rem, 2.8vw, 4.75rem);
+      max-width: min(38vw, 32rem);
     }
   }
 
@@ -162,22 +153,23 @@
   @media (min-width: 768px) {
     .brand-logo-footer {
       width: auto;
-      height: clamp(12rem, 18vw, 18rem);
+      height: clamp(4.5rem, 10vw, 7rem);
       max-height: none;
-      max-width: 90rem;
+      max-width: min(92vw, 36rem);
     }
   }
 
   @media (min-width: 1024px) {
     .brand-logo-footer {
-      height: clamp(13rem, 12vw, 22rem);
-      max-width: 97.5rem;
+      height: clamp(5rem, 6vw, 7.5rem);
+      max-width: 40rem;
     }
   }
 
   @media (min-width: 1280px) {
     .brand-logo-footer {
-      height: clamp(14rem, 10vw, 24rem);
+      height: clamp(5.25rem, 5vw, 8rem);
+      max-width: 44rem;
     }
   }
 
