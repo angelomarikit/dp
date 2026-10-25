@@ -81,12 +81,12 @@ export function Navbar() {
       }`}
     >
       <Container
-        className={`relative grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 sm:gap-3 lg:grid-cols-[minmax(0,40rem)_1fr_auto] xl:grid-cols-[minmax(0,44rem)_1fr_auto] 2xl:grid-cols-[minmax(0,48rem)_1fr_auto] ${headerHeight}`}
+        className={`relative grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 sm:gap-3 lg:grid-cols-[minmax(18rem,40rem)_minmax(0,1fr)_auto] xl:grid-cols-[minmax(20rem,44rem)_minmax(0,1fr)_auto] 2xl:grid-cols-[minmax(22rem,48rem)_minmax(0,1fr)_auto] ${headerHeight}`}
       >
         <button
           type="button"
           onClick={() => handleNav(`#${sectionIds.home}`)}
-          className="col-start-1 z-10 min-w-0 max-w-[calc(100%-4.25rem)] justify-self-start self-center lg:max-w-full"
+          className="col-start-1 z-10 max-w-[calc(100%-4.25rem)] shrink-0 justify-self-start self-center lg:max-w-full lg:min-w-[16rem]"
           aria-label={`${siteConfig.name} home`}
         >
           <BrandLogo

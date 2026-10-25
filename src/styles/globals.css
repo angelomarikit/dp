@@ -99,6 +99,87 @@
     border-color: var(--color-site-cta-hover);
   }
 
+  /* Logo sizing — explicit CSS so production (Vercel) matches local dev */
+  .brand-logo-nav-mobile {
+    width: min(calc(100vw - 5rem), 22rem);
+    height: auto;
+    max-height: 14rem;
+    object-fit: contain;
+    object-position: left;
+  }
+
+  @media (min-width: 640px) {
+    .brand-logo-nav-mobile {
+      width: min(calc(100vw - 4.75rem), 24rem);
+      max-height: 15rem;
+    }
+  }
+
+  .brand-logo-bar {
+    height: 8rem;
+    width: auto;
+    max-width: min(92vw, 55rem);
+    object-fit: contain;
+    object-position: left;
+  }
+
+  @media (min-width: 768px) {
+    .brand-logo-bar {
+      height: 9rem;
+      max-width: 60rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .brand-logo-bar {
+      height: 11.5rem;
+      max-width: 67.5rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .brand-logo-bar {
+      height: 13rem;
+      max-width: 75rem;
+    }
+  }
+
+  .brand-logo-footer {
+    width: 100%;
+    height: auto;
+    max-height: clamp(17rem, 90vw, 48rem);
+    object-fit: contain;
+    object-position: left;
+  }
+
+  @media (min-width: 640px) {
+    .brand-logo-footer {
+      max-height: clamp(18rem, 76vw, 50rem);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .brand-logo-footer {
+      width: auto;
+      height: clamp(12rem, 18vw, 18rem);
+      max-height: none;
+      max-width: 90rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .brand-logo-footer {
+      height: clamp(13rem, 12vw, 22rem);
+      max-width: 97.5rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .brand-logo-footer {
+      height: clamp(14rem, 10vw, 24rem);
+    }
+  }
+
   .showcase-marquee-track {
     display: flex;
     width: max-content;
